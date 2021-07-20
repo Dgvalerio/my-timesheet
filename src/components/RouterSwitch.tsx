@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Home from '../pages/Home';
@@ -12,7 +12,7 @@ export const routes = {
   tests: (): string => `/_`,
 };
 
-const RouterSwitch = () => (
+const RouterSwitch: FC = () => (
   <BrowserRouter>
     <Switch>
       <Route path={routes.home()} exact>
