@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
 
-const Home: FC = () => <h1>Home</h1>;
+import styled from 'styled-components';
+
+const Page = styled.main``;
+
+const Home: FC = () => <Page />;
 
 export default Home;

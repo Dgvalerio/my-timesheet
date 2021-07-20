@@ -10,4 +10,16 @@ export default createGlobalStyle`
     background-color: ${(props) => props.theme.colors.background};
     color: ${(props) => props.theme.colors.text};
   }
+  
+  #root {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    min-height: 100vh;
+  }
+
+  svg {
+    fill: ${(props) => props.theme.colors.text};
+  }
 `;
