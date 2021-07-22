@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 
 import styled from 'styled-components';
 
@@ -21,12 +22,12 @@ const SHeader = styled.header<{ auth: boolean }>`
 `;
 
 const Header: FC = () => {
-  const auth = false;
+  const { signed } = useSelector((state) => state.auth);
 
   return (
-    <SHeader auth={auth}>
+    <SHeader auth={signed}>
       <h1>My Timesheet</h1>
-      {auth && (
+      {signed && (
         <>
           <Icon name="config" size={20} />
           <Icon name="sign out" size={20} />
