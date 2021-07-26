@@ -1,9 +1,12 @@
 import { actions } from './slice';
 
-const { signInSuccess } = actions;
+const { signInSuccess, signOut } = actions;
 
-const signIn = (email: string, password: string) => (dispatch: any) => {
-  if (email && password) dispatch(signInSuccess(email));
-};
+const signIn =
+  (email: string, password: string) =>
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+  (dispatch: any): void => {
+    if (email && password) dispatch(signInSuccess(email));
+  };
 
-export { signIn, signInSuccess };
+export { signIn, signInSuccess, signOut };

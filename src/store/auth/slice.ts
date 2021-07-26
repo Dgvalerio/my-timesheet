@@ -11,6 +11,11 @@ const authSlice = createSlice({
   reducers: {
     signInSuccess(state: IAuthState, action: PayloadAction<string>) {
       state.email = action.payload;
+      state.signed = true;
+    },
+    signOut(state: IAuthState) {
+      state.email = '';
+      state.signed = false;
     },
   },
 });

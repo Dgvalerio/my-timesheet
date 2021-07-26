@@ -1,16 +1,16 @@
-import React, { FC } from 'react';
+import React, { FC, lazy, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { Footer, Header } from './components';
-import Home from './pages/Home';
-import SignIn from './pages/SignIn';
+
+const Home = lazy(() => import('./pages/Home'));
+const SignIn = lazy(() => import('./pages/SignIn'));
 
 export const routes = {
   home: (): string => `/`,
   signIn: (): string => `/signIn`,
   signUp: (): string => `/signUp`,
-  signOut: (): string => `/signOut`,
   settings: (): string => `/settings`,
 };
 
@@ -18,18 +18,23 @@ const App: FC = () => {
   const { signed } = useSelector((state) => state.auth);
 
   return (
-    <>
+    <Suspense fallback={<p>Loading</p>}>
       <Header />
       <Switch>
         <Route path={routes.home()} exact>
           {signed ? <Home /> : <Redirect to={routes.signIn()} />}
         </Route>
-        <Route path={routes.signIn()} exact>
-          {!signed ? <SignIn /> : <Redirect to={routes.home()} />}
+        {!signed && (
+          <Route path={routes.signIn()} exact>
+            <SignIn />
+          </Route>
+        )}
+        <Route path="*">
+          <Redirect to="/" />
         </Route>
       </Switch>
       <Footer />
-    </>
+    </Suspense>
   );
 };
 
