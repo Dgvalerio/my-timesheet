@@ -15,14 +15,7 @@ const StyledSignIn = styled.main`
   form {
     flex-direction: column;
     margin: auto;
-
-    @media (min-width: 0) {
-      max-width: 60%;
-    }
-
-    @media (min-width: 1024px) {
-      max-width: 40%;
-    }
+    max-width: 40%;
 
     gap: ${({ theme }) => theme.sizes.gap};
 
@@ -63,6 +56,20 @@ const StyledSignIn = styled.main`
 
       > :nth-child(2) {
         margin-left: auto;
+      }
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.sizes.width.sm}) {
+    form {
+      max-width: 80%;
+
+      & > div {
+        flex-direction: column-reverse;
+
+        & > :nth-child(2) {
+          margin: 0;
+        }
       }
     }
   }

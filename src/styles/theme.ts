@@ -2,6 +2,9 @@ const theme = {
   sizes: {
     gap: '1.4rem',
     padding: '0.6rem 1.4rem',
+    width: {
+      sm: '48rem',
+    },
   },
   colors: {
     background: '#181818',
