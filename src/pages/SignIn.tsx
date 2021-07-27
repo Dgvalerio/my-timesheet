@@ -2,7 +2,7 @@ import React, { FC, FormEvent, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { signIn } from '../store/auth/actions';
-import Wrapper from '../styles/SignIn';
+import Wrapper from '../styles/pages/SignIn';
 
 const SignIn: FC = () => {
   const dispatch = useDispatch();
