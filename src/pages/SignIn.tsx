@@ -1,7 +1,7 @@
 import React, { FC, FormEvent, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { signIn } from '../store/auth/actions';
+import { googleSignIn, signIn } from '../store/auth/actions';
 import Wrapper from '../styles/pages/SignIn';
 
 const SignIn: FC = () => {
@@ -9,6 +9,10 @@ const SignIn: FC = () => {
 
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
+
+  const handleSignUpClick = () => console.log('handleSignUpClick');
+
+  const handleGoogleClick = () => dispatch(googleSignIn());
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -44,8 +48,12 @@ const SignIn: FC = () => {
           />
         </label>
         <div>
-          <button type="button">Cadastrar</button>
-          <button type="button">Google</button>
+          <button type="button" onClick={handleSignUpClick}>
+            Cadastrar
+          </button>
+          <button type="button" onClick={handleGoogleClick}>
+            Google
+          </button>
           <button type="submit">Entrar</button>
         </div>
       </form>
