@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 const StyledHome = styled.main`
   &,
-  nav {
+  nav,
+  nav > button {
     display: flex;
   }
 
@@ -15,6 +16,8 @@ const StyledHome = styled.main`
   gap: ${({ theme }) => theme.sizes.gap};
 
   nav > button {
+    align-items: center;
+    gap: 0.8rem;
     margin-left: auto;
     font-size: 1rem;
     padding: ${({ theme }) => theme.sizes.padding};

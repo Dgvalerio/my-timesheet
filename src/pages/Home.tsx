@@ -2,6 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 
 import { format } from 'date-fns';
 
+import { Icon } from '../components';
 import { fireData, IAppointment } from '../services/sgbd';
 import Wrapper, { Item } from '../styles/pages/Home';
 
@@ -35,7 +36,9 @@ const Home: FC = () => {
       </p>
       <section>
         <nav>
-          <button type="button">Novo appointment</button>
+          <button type="button">
+            Novo appointment <Icon name="plus" size={12} />
+          </button>
         </nav>
       </section>
       {appointments.map((app) => (
