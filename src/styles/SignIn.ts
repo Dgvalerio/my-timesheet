@@ -11,6 +11,8 @@ const StyledSignIn = styled.main`
 
   justify-content: center;
   padding: ${({ theme }) => theme.sizes.padding};
+  margin-top: auto;
+  margin-bottom: auto;
 
   form {
     flex-direction: column;
@@ -20,7 +22,7 @@ const StyledSignIn = styled.main`
     gap: ${({ theme }) => theme.sizes.gap};
 
     h1 {
-      font-size: 2.4rem;
+      text-align: center;
     }
 
     input,
@@ -29,23 +31,55 @@ const StyledSignIn = styled.main`
       background-color: ${({ theme }) => theme.colors.background};
       color: ${({ theme }) => theme.colors.text};
       font-size: 1.2rem;
-      border-radius: 0.4rem;
-      border: 1px solid ${({ theme }) => theme.colors.border};
+      border: none;
+    }
+
+    label {
+      flex-direction: column;
+
+      &:focus-within::after {
+        animation: active linear 8s infinite;
+      }
+
+      &::after {
+        content: '';
+        background: linear-gradient(to right, #020659, #a6f9fd, #020659);
+        background-size: 400% 400%;
+
+        height: 2px;
+      }
+
+      input {
+        width: auto;
+      }
+    }
+
+    @keyframes active {
+      0% {
+        background-position: 0 50%;
+      }
+      50% {
+        background-position: 200% 50%;
+      }
+      100% {
+        background-position: 400% 50%;
+      }
     }
 
     button {
       cursor: pointer;
       outline: none;
       justify-content: center;
+      border-radius: 0.4rem;
 
       &:hover {
-        background-color: ${({ theme }) => theme.colors.text};
-        color: ${({ theme }) => theme.colors.background};
+        background: linear-gradient(to right, #010326, #1a0d73, #010326);
+        background-size: 400% 400%;
+        animation: active linear 8s infinite;
       }
 
       &:active {
-        background-color: #fff;
-        color: #000;
+        background-color: ${({ theme }) => theme.colors.actions.active};
       }
     }
 

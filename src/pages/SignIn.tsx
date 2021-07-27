@@ -24,7 +24,7 @@ const SignIn: FC = () => {
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h1>Entrar</h1>
         <label htmlFor="email">
           <input
             id="email"

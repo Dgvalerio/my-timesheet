@@ -1,10 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
   * {
     margin: 0;
+    outline: none;
     font-family: Roboto, sans-serif;
   }
   
@@ -23,5 +22,11 @@ export default createGlobalStyle`
 
   svg {
     fill: ${(props) => props.theme.colors.text};
+  }
+
+  h1 {
+    font-size: 60px;
+    font-weight: lighter;
+    letter-spacing: -0.5px;
   }
 `;

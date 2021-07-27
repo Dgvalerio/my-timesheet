@@ -35,11 +35,11 @@ const SHeader = styled.header<{ auth: boolean }>`
     }
 
     &:hover {
-      background-color: #ffffff11;
+      background-color: ${({ theme }) => theme.colors.actions.hover};
     }
 
     &:active {
-      background-color: #00000033;
+      background-color: ${({ theme }) => theme.colors.actions.active};
     }
   }
 `;

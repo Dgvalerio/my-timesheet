@@ -7,9 +7,13 @@ const theme = {
     },
   },
   colors: {
-    background: '#181818',
+    background: '#0D0D0D',
     text: '#FFFFFFBB',
     border: '#FFFFFF77',
+    actions: {
+      active: '#00000033',
+      hover: '#FFFFFF11',
+    },
   },
 };
 
