@@ -12,6 +12,11 @@ export default createGlobalStyle`
     color: ${(props) => props.theme.colors.text};
   }
   
+  *::selection {
+    background-color: ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.background};
+  }
+  
   #root {
     display: flex;
     flex-direction: column;
