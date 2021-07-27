@@ -10,7 +10,6 @@ const StyledSignIn = styled.main`
   }
 
   justify-content: center;
-  padding: ${({ theme }) => theme.sizes.padding};
   margin-top: auto;
   margin-bottom: auto;
 
@@ -76,10 +75,11 @@ const StyledSignIn = styled.main`
         background: linear-gradient(to right, #010326, #1a0d73, #010326);
         background-size: 400% 400%;
         animation: active linear 8s infinite;
+        color: ${({ theme }) => theme.colors.text};
       }
 
       &:active {
-        background-color: ${({ theme }) => theme.colors.actions.active};
+        background: ${({ theme }) => theme.colors.actions.active};
       }
     }
 

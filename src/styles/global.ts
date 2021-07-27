@@ -25,6 +25,10 @@ export default createGlobalStyle`
 
     min-height: 100vh;
   }
+  
+  main {
+    padding: ${({ theme }) => theme.sizes.padding};
+  }
 
   svg {
     fill: ${(props) => props.theme.colors.text};
