@@ -5,11 +5,12 @@ export default createGlobalStyle`
     margin: 0;
     outline: none;
     font-family: Roboto, sans-serif;
+    transition: all 128ms;
   }
   
   body {
-    background-color: ${(props) => props.theme.colors.background};
-    color: ${(props) => props.theme.colors.text};
+    background-color: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text};
   }
   
   *::selection {

@@ -61,7 +61,8 @@
         "tsx": "never"
       }
     ],
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/prop-types": "off"
   },
   "settings": {
     "import/resolver": {

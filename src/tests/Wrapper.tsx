@@ -1,4 +1,4 @@
-// test-utils.jsx
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC, ReactElement, ReactNode } from 'react';
 import { Provider } from 'react-redux';
 
@@ -7,7 +7,7 @@ import { render as rtlRender, RenderResult } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
 import authReducer from '../store/auth/slice';
-import theme from '../styles/theme';
+import { darkTheme as theme } from '../styles/theme';
 
 const render = (
   ui: ReactElement,

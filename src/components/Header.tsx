@@ -4,16 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { signOut } from '../store/auth/actions';
+import { toggleThemeMode } from '../store/ui/actions';
 import Icon from './Icon';
 
-const SHeader = styled.header<{ auth: boolean }>`
+const SHeader = styled.header`
   &,
   button {
     display: flex;
   }
 
   align-items: stretch;
-  justify-content: ${({ auth }) => (!auth ? 'center' : 'space-between')};
+  justify-content: space-between;
 
   h1,
   button {
@@ -50,9 +51,14 @@ const Header: FC = () => {
 
   const handleSignOut = () => dispatch(signOut());
 
+  const handleToggleThemeMode = () => dispatch(toggleThemeMode());
+
   return (
-    <SHeader auth={signed}>
+    <SHeader>
       <h1>My Timesheet</h1>
+      <button type="button" onClick={handleToggleThemeMode}>
+        <Icon name="lamp on" size={20} />
+      </button>
       {signed && (
         <>
           <button type="button">

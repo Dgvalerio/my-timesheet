@@ -1,8 +1,9 @@
 import 'react-redux';
-import { IAuthState } from '../store/auth/slice';
+import { IAuthState, IUIState } from './interfaces';
 
 declare module 'react-redux' {
   export interface DefaultRootState {
     auth: IAuthState;
+    ui: IUIState;
   }
 }
