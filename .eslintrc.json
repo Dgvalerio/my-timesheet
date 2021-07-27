@@ -60,7 +60,8 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "react/require-default-props": "off"
   },
   "settings": {
     "import/resolver": {
