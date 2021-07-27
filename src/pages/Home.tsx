@@ -1,37 +1,29 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 
+import { format } from 'date-fns';
+
+import { fireData, IAppointment } from '../services/sgbd';
 import Wrapper, { Item } from '../styles/pages/Home';
 
-interface Appointment {
-  order: number;
-  initialTime: string;
-  finalTime: string;
-  duration: string;
-  preDuration: string;
-  description: string;
-}
-
 const Home: FC = () => {
-  const [appointments, setAppointments] = useState<Appointment[]>([
-    {
-      order: 1,
-      initialTime: '7:30',
-      finalTime: '8:20',
-      duration: '50',
-      preDuration: '32',
-      description:
-        'Assistindo vídeo-aulas da seção 28: &ldquo;Optional: React Hooks Introduction & Summary&rdquo; do curso &ldquo;React - The Complete Guide&rdquo;, na Udemy.',
-    },
-    {
-      order: 2,
-      initialTime: '7:30',
-      finalTime: '8:20',
-      duration: '50',
-      preDuration: '32',
-      description:
-        'Assistindo vídeo-aulas da seção 28: &ldquo;Optional: React Hooks Introduction & Summary&rdquo; do curso &ldquo;React - The Complete Guide&rdquo;, na Udemy.',
-    },
-  ]);
+  const [day, setDay] = useState(new Date());
+
+  const [appointments, setAppointments] = useState<IAppointment[]>([]);
+
+  const loadAppointments = useCallback(() => {
+    fireData
+      .list('appointments', {
+        condition: [
+          { field: 'day', equalTo: format(day, 'dd/MM/yyyy') },
+          // { field: 'uid', equalTo: user?.uid || '' },
+        ],
+      })
+      .then((data: IAppointment[]) =>
+        setAppointments(data.sort((a, b) => (a.order || 0) - (b.order || 0)))
+      );
+  }, [day]);
+
+  useEffect(() => loadAppointments(), [loadAppointments]);
 
   return (
     <Wrapper>
@@ -50,17 +42,17 @@ const Home: FC = () => {
         <Item key={app.order} draggable>
           <details>
             <summary>
-              {app.order}. {app.initialTime} às {app.finalTime}{' '}
-              <em>({app.duration} minutos)</em>
+              {app.order}. {app.initialHour} às {app.finalHour}{' '}
+              <em>({app.actualDuration} minutos)</em>
             </summary>
             <p>
-              <b>Duração real:</b> {app.duration} minutos
+              <b>Duração real:</b> {app.actualDuration} minutos
             </p>
             <p>
-              <b>Duração prevista:</b> {app.preDuration} minutos
+              <b>Duração prevista:</b> {app.expectedDuration} minutos
             </p>
             <b>Descrição:</b>
-            <p>{app.description}</p>
+            <p>{app.message}</p>
           </details>
         </Item>
       ))}
