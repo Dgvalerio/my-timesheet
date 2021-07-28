@@ -1,16 +1,19 @@
 import React, { FC, FormEvent, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
+import { routes } from '../App';
 import { googleSignIn, signIn } from '../store/auth/actions';
 import Wrapper from '../styles/pages/SignIn';
 
 const SignIn: FC = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
 
-  const handleSignUpClick = () => console.log('handleSignUpClick');
+  const handleSignUpClick = () => history.push(routes.signUp());
 
   const handleGoogleClick = () => dispatch(googleSignIn());
 

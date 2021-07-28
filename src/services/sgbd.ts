@@ -90,7 +90,7 @@ export const fireData = {
       return error;
     }
   },
-  update: async (collection: Collection, data: any): Promise<any> => {
+  update: async (collection: Collection, data: IAppointment): Promise<any> => {
     try {
       await db.collection(collection).doc(data.id).set(data);
 

@@ -7,7 +7,7 @@ import { fireData, IAppointment } from '../services/sgbd';
 import Wrapper, { Item } from '../styles/pages/Home';
 
 const Home: FC = () => {
-  const [day, setDay] = useState(new Date());
+  const day = useState(new Date())[0];
 
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
 
