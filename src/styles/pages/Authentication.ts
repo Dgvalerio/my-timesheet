@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
-const StyledSignIn = styled.main`
+const AuthContainer = styled.main`
   form,
-  label,
-  input,
   div {
     display: flex;
     width: 100%;
@@ -24,33 +22,12 @@ const StyledSignIn = styled.main`
       text-align: center;
     }
 
-    input,
     button {
       padding: 0.6rem 0.8rem;
       background-color: ${({ theme }) => theme.colors.background};
       color: ${({ theme }) => theme.colors.text};
       font-size: 1.2rem;
       border: none;
-    }
-
-    label {
-      flex-direction: column;
-
-      &:focus-within::after {
-        animation: active linear 8s infinite;
-      }
-
-      &::after {
-        content: '';
-        background: linear-gradient(to right, #020659, #a6f9fd, #020659);
-        background-size: 400% 400%;
-
-        height: 2px;
-      }
-
-      input {
-        width: auto;
-      }
     }
 
     @keyframes active {
@@ -109,4 +86,4 @@ const StyledSignIn = styled.main`
   }
 `;
 
-export default StyledSignIn;
+export default AuthContainer;

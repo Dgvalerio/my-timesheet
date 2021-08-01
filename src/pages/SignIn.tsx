@@ -1,10 +1,12 @@
 import React, { FC, FormEvent, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { routes } from '../App';
+import Input from '../components/Input';
 import { googleSignIn, signIn } from '../store/auth/actions';
-import Wrapper from '../styles/pages/SignIn';
+import Wrapper from '../styles/pages/Authentication';
 
 const SignIn: FC = () => {
   const dispatch = useDispatch();
@@ -23,7 +25,10 @@ const SignIn: FC = () => {
     const email = emailInput.current?.value;
     const password = passwordInput.current?.value;
 
-    if (!email || !password) return;
+    if (!email || !password) {
+      toast.error('Preencha todos os campos!');
+      return;
+    }
 
     dispatch(signIn(email, password));
   };
@@ -32,24 +37,13 @@ const SignIn: FC = () => {
     <Wrapper>
       <form onSubmit={handleSubmit}>
         <h1>Entrar</h1>
-        <label htmlFor="email">
-          <input
-            id="email"
-            type="email"
-            placeholder="E-mail"
-            required
-            ref={emailInput}
-          />
-        </label>
-        <label htmlFor="password">
-          <input
-            id="password"
-            type="password"
-            placeholder="Senha"
-            required
-            ref={passwordInput}
-          />
-        </label>
+        <Input id="email" type="email" placeholder="E-mail" ref={emailInput} />
+        <Input
+          id="password"
+          type="password"
+          placeholder="Senha"
+          ref={passwordInput}
+        />
         <div>
           <button type="button" onClick={handleSignUpClick}>
             Cadastrar

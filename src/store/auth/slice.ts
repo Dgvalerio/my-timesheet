@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IAuthState, IUser, IUserCredential } from '../../types/interfaces';
+import { IAuthState, IUser } from '../../types/interfaces';
 
 const initialState: IAuthState = {
   signed: false,
   user: null,
-  credential: null,
+  token: null,
   settings: {
     startOfWork: '07:30',
     workingHours: '06:00',
@@ -21,11 +21,11 @@ const authSlice = createSlice({
       state: IAuthState,
       action: PayloadAction<{
         user: IUser;
-        credential: IUserCredential | null;
+        token: string;
       }>
     ) {
       state.user = action.payload.user;
-      state.credential = action.payload.credential;
+      state.token = action.payload.token;
       state.signed = true;
     },
     signOut(state: IAuthState) {

@@ -1,7 +1,17 @@
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+
 import firebase from 'firebase/app';
 
 export type firebaseUser = firebase.User;
 export type firebaseUserCredential = firebase.auth.AuthCredential;
+
+export interface IInput
+  extends DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
+  error?: boolean;
+}
 
 export interface IUser {
   uid: string;
@@ -27,7 +37,7 @@ export interface ISettings {
 export interface IAuthState {
   signed: boolean;
   user: IUser | firebaseUser | null;
-  credential: IUserCredential | firebaseUserCredential | null;
+  token: string | null;
   settings: ISettings;
 }
 

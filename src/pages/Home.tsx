@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 
 import { format } from 'date-fns';
 
-import { Icon } from '../components';
+import Icon from '../components/Icon';
 import { fireData, IAppointment } from '../services/sgbd';
 import Wrapper, { Item } from '../styles/pages/Home';
 

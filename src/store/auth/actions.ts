@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable no-throw-literal */
 import { Dispatch } from 'react';
 import { toast } from 'react-toastify';
 
@@ -6,12 +6,7 @@ import { Action } from '@reduxjs/toolkit';
 import firebase from 'firebase/app';
 
 import { fireAuth } from '../../services/firebase';
-import {
-  firebaseUser,
-  firebaseUserCredential,
-  IUser,
-  IUserCredential,
-} from '../../types/interfaces';
+import { firebaseUser, IUser } from '../../types/interfaces';
 import { actions } from './slice';
 
 const { signInSuccess, signOut } = actions;
@@ -24,34 +19,29 @@ const processUser = (user: firebaseUser): IUser => ({
   phoneNumber: user.phoneNumber,
 });
 
-const processCredential = (
-  credential: firebaseUserCredential
-): IUserCredential => ({
-  providerId: credential.providerId,
-  signInMethod: credential.signInMethod,
-  // @ts-ignore
-  accessToken: credential.accessToken,
-  // @ts-ignore
-  idToken: credential.idToken,
-});
-
 const signIn =
   (email: string, password: string) =>
   async (dispatch: Dispatch<Action>): Promise<void> => {
     try {
-      const { credential, user } = await fireAuth.signInWithEmailAndPassword(
+      const { user } = await fireAuth.signInWithEmailAndPassword(
         email,
         password
       );
 
       if (!user) return;
 
-      if (!credential) return;
+      if (!fireAuth.currentUser)
+        throw {
+          code: 'sign-in-without-user',
+          message: 'Erro ao logar após cadastrar, tente novamente.',
+        };
+
+      const token = await fireAuth.currentUser.getIdToken();
 
       await dispatch(
         signInSuccess({
           user: processUser(user),
-          credential: processCredential(credential),
+          token,
         })
       );
     } catch ({ message }) {
@@ -59,22 +49,79 @@ const signIn =
     }
   };
 
+const signUp =
+  (name: string, email: string, password: string, passwordConfirm: string) =>
+  async (dispatch: Dispatch<Action>): Promise<void> => {
+    try {
+      if (password !== passwordConfirm)
+        throw {
+          code: 'different-passwords',
+          message: 'As senhas não conferem, tente novamente.',
+        };
+
+      const { user } = await fireAuth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      if (!fireAuth.currentUser)
+        throw {
+          code: 'sign-in-without-user',
+          message: 'Erro ao logar após cadastrar, tente novamente.',
+        };
+
+      await fireAuth.currentUser.updateProfile({ displayName: name });
+      const token = await fireAuth.currentUser.getIdToken();
+
+      if (!user) return;
+
+      await dispatch(
+        signInSuccess({
+          user: processUser(user),
+          token,
+        })
+      );
+    } catch ({ message, code }) {
+      switch (code) {
+        case 'different-passwords':
+          toast.error(message);
+          break;
+        case 'auth/email-already-in-use':
+          toast.error(
+            'Esse endereço de e-mail já está sendo usado por outra conta.'
+          );
+          break;
+        case 'auth/weak-password':
+          toast.error('A senha deve ter pelo menos 6 caracteres .');
+          break;
+        default:
+          toast.error(message);
+      }
+    }
+  };
+
 const googleSignIn =
   () =>
   async (dispatch: Dispatch<Action>): Promise<void> => {
     try {
-      const { credential, user } = await fireAuth.signInWithPopup(
+      const { user } = await fireAuth.signInWithPopup(
         new firebase.auth.GoogleAuthProvider()
       );
 
       if (!user) return;
 
-      if (!credential) return;
+      if (!fireAuth.currentUser)
+        throw {
+          code: 'sign-in-without-user',
+          message: 'Erro ao logar após cadastrar, tente novamente.',
+        };
+
+      const token = await fireAuth.currentUser.getIdToken();
 
       await dispatch(
         signInSuccess({
           user: processUser(user),
-          credential: processCredential(credential),
+          token,
         })
       );
     } catch ({ message }) {
@@ -82,4 +129,4 @@ const googleSignIn =
     }
   };
 
-export { signIn, signInSuccess, signOut, googleSignIn };
+export { signIn, signUp, signInSuccess, signOut, googleSignIn };
