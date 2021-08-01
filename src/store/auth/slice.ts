@@ -30,6 +30,7 @@ const authSlice = createSlice({
     },
     signOut(state: IAuthState) {
       state.user = null;
+      state.token = null;
       state.signed = false;
     },
   },

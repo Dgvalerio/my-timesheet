@@ -3,7 +3,9 @@ import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import firebase from 'firebase/app';
 
 export type firebaseUser = firebase.User;
-export type firebaseUserCredential = firebase.auth.AuthCredential;
+export type FieldPath = firebase.firestore.FieldPath;
+export type OrderByDirection = firebase.firestore.OrderByDirection;
+export type DocumentReference = firebase.firestore.DocumentReference;
 
 export interface IInput
   extends DetailedHTMLProps<

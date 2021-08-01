@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { toast } from 'react-toastify';
 
-import firebase from 'firebase/app';
-
+import {
+  DocumentReference,
+  FieldPath,
+  OrderByDirection,
+} from '../types/interfaces';
 import { fireDB as db } from './firebase';
-
-type FieldPath = firebase.firestore.FieldPath;
-type OrderByDirection = firebase.firestore.OrderByDirection;
-type DocumentReference = firebase.firestore.DocumentReference;
 
 type Collection = 'appointments' | 'forUserSettings';
 

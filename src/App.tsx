@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Footer from './components/Footer';
 import Header from './components/Header';
+import Loading from './components/Loading';
 
 const Home = lazy(() => import('./pages/Home'));
 const SignIn = lazy(() => import('./pages/SignIn'));
@@ -20,7 +21,7 @@ const App: FC = () => {
   const { signed } = useSelector((state) => state.auth);
 
   return (
-    <Suspense fallback={<p>Loading</p>}>
+    <Suspense fallback={<Loading />}>
       <Header />
       <Switch>
         <Route path={routes.home()} exact>
