@@ -4,23 +4,12 @@ import { toast } from 'react-toastify';
 import {
   DocumentReference,
   FieldPath,
+  IAppointment,
   OrderByDirection,
 } from '../types/interfaces';
 import { fireDB as db } from './firebase';
 
 type Collection = 'appointments' | 'forUserSettings';
-
-export interface IAppointment {
-  id?: string;
-  order?: number;
-  day: string;
-  actualDuration: number;
-  expectedDuration: number;
-  message: string;
-  initialHour?: string;
-  finalHour?: string;
-  uid?: string;
-}
 
 type CollectionData = IAppointment;
 
@@ -29,7 +18,7 @@ interface IListConfig {
   condition?: { field: string | FieldPath; equalTo: string }[];
 }
 
-export const fireData = {
+const fireData = {
   create: async (
     collection: Collection,
     data: CollectionData
@@ -114,3 +103,5 @@ export const fireData = {
     }
   },
 };
+
+export default fireData;

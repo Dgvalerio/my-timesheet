@@ -46,3 +46,15 @@ export interface IAuthState {
 export interface IUIState {
   theme: 'dark' | 'light';
 }
+
+export interface IAppointment {
+  id?: string;
+  order?: number;
+  day: string;
+  actualDuration: number;
+  expectedDuration: number;
+  message: string;
+  initialHour?: string;
+  finalHour?: string;
+  uid?: string;
+}

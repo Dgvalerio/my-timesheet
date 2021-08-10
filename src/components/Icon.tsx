@@ -1,12 +1,26 @@
 import React from 'react';
 
+// Fonts searched in https://iconmonstr.com/
+
+type iconName =
+  | 'config'
+  | 'sign out'
+  | 'alert'
+  | 'lamp on'
+  | 'lamp off'
+  | 'plus'
+  | 'chevron up'
+  | 'chevron right'
+  | 'chevron down'
+  | 'chevron left';
+
 const Icon = ({
   name,
   size,
   width,
   height,
 }: {
-  name: 'config' | 'sign out' | 'alert' | 'lamp on' | 'lamp off' | 'plus';
+  name: iconName;
   size?: number;
   width?: number;
   height?: number;
@@ -40,6 +54,24 @@ const Icon = ({
       break;
     case 'plus':
       icon = <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />;
+      break;
+    case 'chevron up':
+      icon = (
+        <path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z" />
+      );
+      break;
+    case 'chevron right':
+      icon = <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />;
+      break;
+    case 'chevron down':
+      icon = (
+        <path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z" />
+      );
+      break;
+    case 'chevron left':
+      icon = (
+        <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
+      );
       break;
     default:
       icon = (

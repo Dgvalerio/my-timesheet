@@ -6,6 +6,7 @@ export default createGlobalStyle`
     margin: 0;
     outline: none;
     font-family: Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
     transition: all 128ms;
 
     &::-webkit-scrollbar {
@@ -49,7 +50,7 @@ export default createGlobalStyle`
   }
 
   h1 {
-    font-size: 60px;
+    font-size: 48px;
     font-weight: lighter;
     letter-spacing: -0.5px;
   }
